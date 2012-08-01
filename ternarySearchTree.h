@@ -101,10 +101,11 @@ struct TstItem
 	String key;
 	Object value;
 	
-	void operator=( const TstItem & item )
+	TstItem& operator=( const TstItem & item )
 	{
 		key = item.key;
 		value = item.value;
+		return *this;
 	}
 	bool operator>( const TstItem & item ) const
 	{

@@ -49,16 +49,16 @@ public:
 
 	struct NgramToken 
 	{
-		NgramToken()
+		NgramToken() : ngram(), value()
 		{
 		}
-		NgramToken( String & newNgram, NgramValue & newValue )
+		NgramToken( String & newNgram, NgramValue & newValue ) : ngram(), value()
 		{
 			ngram = newNgram;
 			value = newValue;
 		}
 		// Copy constructor
-		NgramToken( const NgramToken & copy )
+		NgramToken( const NgramToken & copy ) : ngram(), value()
 		{
 			ngram = copy.ngram;
 			value = copy.value;
@@ -66,10 +66,11 @@ public:
 		String ngram;
 		NgramValue value;
 
-		void operator=( const NgramToken & ngramToken )
+		NgramToken& operator=( const NgramToken & ngramToken )
 		{
 			ngram = ngramToken.ngram;
 			value = ngramToken.value;
+			return *this;
 		}
 		/**
 		* use following operators if we need to order the ngrams by frequency

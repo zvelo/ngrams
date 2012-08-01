@@ -41,7 +41,7 @@ class Ngrams : public INgrams
 {
 public:
 
-	Ngrams( int newNgramN, const char * newInFileName, const char * newOutFileName, const char * newDelimiters = Config::getDefaultDelimiters(), const char * newStopChars = Config::getDefaultStopChars() );
+	Ngrams( int newNgramN, const char * newText, const char * newDelimiters = Config::getDefaultDelimiters(), const char * newStopChars = Config::getDefaultStopChars() );
 
 	~Ngrams()
 	{
@@ -72,9 +72,9 @@ public:
 		this->stopChars = newStopChars;
 	}
 
-	String & getInFileName()
+	String & getText()
 	{
-		return this->inFileName;
+		return this->text;
 	}
 
 	int getN()
@@ -181,8 +181,7 @@ protected:
 
 private:
 
-	String inFileName;	// input text file name
-	String outFileName;	// output text file name
+	String text;	// text content
 	String stopChars;
 	int tokenCount; //used for counting when parsing text
 	int * totals;   // array for count total grams ( duplicated are counted ) for each N

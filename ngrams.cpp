@@ -25,8 +25,8 @@ WebSite: http://www.cs.dal.ca/~zyu
 
 #include "ngrams.h"
 
-Ngrams::Ngrams( int newNgramN, const char * newInFileName, const char * newOutFileName, const char * newDelimiters, const char * newStopChars ) :
-ngramN(newNgramN), inFileName(newInFileName), outFileName(newOutFileName)
+Ngrams::Ngrams( int newNgramN, const char * newText, const char * newDelimiters, const char * newStopChars ) :
+ngramN(newNgramN), text(newText)
 {
 	// initial queue
 	head = tail = 0;

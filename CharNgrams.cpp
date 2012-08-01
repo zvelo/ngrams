@@ -24,9 +24,12 @@ WebSite: http://www.cs.dal.ca/~zyu
 *************************************************************************/
 
 #include "CharNgrams.h"
+#include <sstream>
 
-CharNgrams::CharNgrams( int newNgramN, const char * newInFileName, const char * newOutFileName, const char * newDelimiters, const char * newStopChars ) :
-Ngrams( newNgramN, newInFileName, newOutFileName, newDelimiters, newStopChars )
+using ::std::istringstream;
+
+CharNgrams::CharNgrams( int newNgramN, const char * newText, const char * newDelimiters, const char * newStopChars ) :
+Ngrams( newNgramN, newText, newDelimiters, newStopChars )
 {
 	addTokens();
 }
@@ -37,16 +40,13 @@ CharNgrams::~CharNgrams()
 
 void CharNgrams::addTokens()
 {
-	// get token String from input file
-	String & inFileName = getInFileName();
-	FILE * fp = inFileName.length() > 0 ? fopen( inFileName.c_str(), "r" ) : stdin;
-
 	int count = 0;
 	char c[2];
 	c[1]=0;
 	bool isSpecialChar = false;
 
-	while ( ( c[0] = (char) toupper(fgetc( fp ) )) != EOF )
+	istringstream is(getText().c_str());
+	while ( ( c[0] = (char)toupper(is.get()) ) != EOF )
 	{
 		if ( isStopChar( c[0] ) )
 		{
@@ -78,7 +78,6 @@ void CharNgrams::addTokens()
 	{
 		preParse( count );
 	}
-	fclose( fp );
 }
 
 void CharNgrams::preParse( int count )

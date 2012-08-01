@@ -24,9 +24,12 @@ WebSite: http://www.cs.dal.ca/~zyu
 *************************************************************************/
 
 #include "WordNgrams.h"
+#include <sstream>
 
-WordNgrams::WordNgrams( int newNgramN, const char * newInFileName, const char * newOutFileName, const char * newDelimiters, const char * newStopChars ) :
-Ngrams( newNgramN, newInFileName, newOutFileName, newDelimiters, newStopChars )
+using ::std::istringstream;
+
+WordNgrams::WordNgrams( int newNgramN, const char * newText, const char * newDelimiters, const char * newStopChars ) :
+Ngrams( newNgramN, newText, newDelimiters, newStopChars )
 {
 	addTokens();
 
@@ -38,21 +41,14 @@ WordNgrams::~WordNgrams()
 
 void WordNgrams::addTokens()
 {
-	// get token String from input file
-	String & inFileName = getInFileName();
-	FILE * fp = inFileName.length() > 0 ? fopen( inFileName.c_str(), "r" ) : stdin;
-	if ( !fp )
-	{
-		printf("Can not find file %s, use stdio as input.\n", inFileName.c_str() );
-		fp = stdin;
-	}
-
 	int count = 0;
 	char c;
 	bool isSpecialChar = false;
 	String token;
 	token.reserve(256);
-	while ( ( c = (char) fgetc( fp ) ) != EOF )
+
+	istringstream is(getText().c_str());
+	while ( ( c = (char)is.get() ) != EOF )
 	{
 		if ( isDelimiter( c ) || isStopChar ( c ) )
 		{
@@ -93,7 +89,7 @@ void WordNgrams::addTokens()
 	addToken( "_" );
 	}
 	*/
-	fclose( fp );
+	//fclose( fp );
 }
 
 void WordNgrams::addToken ( const String & token )

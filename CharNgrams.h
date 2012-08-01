@@ -40,7 +40,7 @@ class CharNgrams : public Ngrams
 
 public:
 
-	CharNgrams( int newNgramN, const char * newInFileName, const char * newOutFileName, const char * newDelimiters = Config::getDefaultDelimiters(), const char * newStopChars = Config::getDefaultStopChars() );
+	CharNgrams( int newNgramN, const char * newText, const char * newDelimiters = Config::getDefaultDelimiters(), const char * newStopChars = Config::getDefaultStopChars() );
 
 	virtual ~CharNgrams();
 

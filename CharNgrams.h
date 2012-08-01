@@ -73,7 +73,7 @@ private:
 	* get all ngrams for given N
 	* @return total number of ngrams for the N
 	*/
-	void getNgrams( vector< NgramToken * > & ngramVector, int n );
+	void getNgrams( Vector< NgramToken * > & ngramVector, int n );
 
 };
 #endif

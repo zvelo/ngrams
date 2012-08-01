@@ -145,7 +145,7 @@ private:
 	* get ngram list for given n
 	*/
 
-	void getNgrams( vector< NgramToken * > & ngramVector, int n );
+	void getNgrams( Vector< NgramToken * > & ngramVector, int n );
 
 };
 #endif

@@ -162,7 +162,7 @@ void CharNgrams::output()
         }
 }
 
-void CharNgrams::getNgrams( vector< NgramToken * > & ngramVector, int n )
+void CharNgrams::getNgrams( Vector< NgramToken * > & ngramVector, int n )
 {
 	// Get sorted item list
 	//Vector<String> & keyVector = getKeys( );

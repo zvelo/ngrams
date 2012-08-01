@@ -142,7 +142,7 @@ public:
 	/**
 	* Build balanced tree by binary inserting item of a sorted item list.
 	* 
-	* @param	itemVector - vectors that holds all item which is pair of key & value
+	* @param	itemVector - Vectors that holds all item which is pair of key & value
 	* Note: current TST tree will be cleared before build balanced tree.
 	*
 	*/
@@ -174,7 +174,7 @@ public:
 	/**
 	* get item from the tree at specified position
 	* 
-	* @param	index - The index of the item in the item vector
+	* @param	index - The index of the item in the item Vector
 	* @return	pointer to the item, NULL if not found
 	*/
 	
@@ -192,7 +192,7 @@ public:
 	/**
 	* Get key from the tree
 	*
-	* @param	index - The index of the item in the key vector.
+	* @param	index - The index of the item in the key Vector.
 	* @return	The key of the item with specified index, NULL if not found
 	*/
 
@@ -217,7 +217,7 @@ public:
 	/**
 	* get value from the tree
 	* 
-	* @param	index - The index of the value in the value vector
+	* @param	index - The index of the value in the value Vector
 	* @return	pointer to the value, NULL if not found
 	*/
 
@@ -227,11 +227,11 @@ public:
 	}
 
 	/**
-	* Search to find the index of the specified key in the key vector
+	* Search to find the index of the specified key in the key Vector
 	* inline to improve search performance.
 	*
 	* @param	key - key to be search in the ternary search tree
-	* @return	index of the key in key vector. If key is not found, return -1
+	* @return	index of the key in key Vector. If key is not found, return -1
 	*/
 
 	int getItemIndex( const char * key )
@@ -267,7 +267,7 @@ public:
 	* .a.a.a matches many words, including banana, casaba, and pajama.
 	* Tal* matches all word with prefix Tal
 	* @param	key - pattern for the searching
-	* @return	an index vector for all returned keys
+	* @return	an index Vector for all returned keys
 	*/
 
 	Vector<int> partialMatchSearch( const char * key );
@@ -277,7 +277,7 @@ public:
 	*
 	* @param	key	- key to be searched
 	* @param	distance - Hamming distance for the search.
-	* @return	an index vector for all matching keys
+	* @return	an index Vector for all matching keys
 	*
 	* @example search for jerry with distance 1 will return berry, ferry, gerry and etc.
 	*
@@ -294,7 +294,7 @@ public:
 	* This method return all keys that has the given prefix.
 	* 
 	* @param	prefix - prefix to search keys
-	* @return	an index vector for all returned keys
+	* @return	an index Vector for all returned keys
 	*
 	* Note: character '?' will match any char, 
 	* '*' will match any char(s), which can only be used as last char in the pattern for current implementation.
@@ -343,7 +343,7 @@ public:
 #endif
 		// clean up the tree
 		cleanup( root ); 
-		// clean up key, value vectors and reset variables.
+		// clean up key, value Vectors and reset variables.
 		/*keyVector.clear();
 		valueVector.clear();
 		*/
@@ -430,9 +430,9 @@ private:
 	* Recursively build balanced tree by binary inserting item of a sorted item list
 	* from specified start to end position
 	* 
-	* @param	itemVector - vectors that holds all item which is pair of key & value
-	* @param	start - start position of the vector
-	* @param	end - end position of the vector
+	* @param	itemVector - Vectors that holds all item which is pair of key & value
+	* @param	start - start position of the Vector
+	* @param	end - end position of the Vector
 	* Note: current TST tree will be cleared before build balanced tree.
 	*
 	*/
@@ -445,17 +445,17 @@ private:
 
 	void getSortedItemIndexes( TstTree p );
 
-	/*Vector<String> keyVector; // vector to track all inserted keys.
+	/*Vector<String> keyVector; // Vector to track all inserted keys.
 
-	Vector<Object> valueVector; // vector to track all inserted objects.
+	Vector<Object> valueVector; // Vector to track all inserted objects.
 	*/
-	Vector< TstItem<Object> * > itemVector; /* vector to track of inserted items */
+	Vector< TstItem<Object> * > itemVector; /* Vector to track of inserted items */
 
-	Vector<int> * sortedItemIndexVectorPtr;	// pointer to the vector of sorted items, used for recursive traverse
+	Vector<int> * sortedItemIndexVectorPtr;	// pointer to the Vector of sorted items, used for recursive traverse
 
-	Vector<int> * pmVectorPtr;	// pointer to the vector of partial matched items, used for recursive matching
+	Vector<int> * pmVectorPtr;	// pointer to the Vector of partial matched items, used for recursive matching
 
-	Vector<int> * nearVectorPtr; // pointer to the vector of near neighbor items, used for recursive searching.
+	Vector<int> * nearVectorPtr; // pointer to the Vector of near neighbor items, used for recursive searching.
 
 	TstTree root;
 
@@ -675,7 +675,7 @@ void TernarySearchTree<Object>::nearSearch( TstTree tree, const char * key, int 
 	{
 		if ( (int) strlen( key ) <= distance )
 		{
-			nearVectorPtr->add( tree->index );	// found the matched key, added it to index vector
+			nearVectorPtr->add( tree->index );	// found the matched key, added it to index Vector
 		}
 	}
 	else

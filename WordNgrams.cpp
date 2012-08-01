@@ -214,7 +214,7 @@ void WordNgrams::output()
 
 }
 
-void WordNgrams::getNgrams( vector< NgramToken * > & ngramVector, int n )
+void WordNgrams::getNgrams( Vector< NgramToken * > & ngramVector, int n )
 {
 
 	// Get sorted item list

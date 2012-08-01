@@ -226,7 +226,7 @@ string & string::append( const char* str, size_t len )
    return *this;
 }
 
-inline string & string::append(int c)
+string & string::append(int c)
 {
    size_t len = this->length();
    if( len + 1 >= this->getSize() )

@@ -308,7 +308,7 @@ void WordNgrams::decodeWordNgram( const string & ngram, int n, string & decodedN
 		decodedNgram += this->wordTable.getKey( decodeInteger( buff, ENCODE_BASE ) );
 		if ( loop < n )
 		{
-			decodedNgram.append( '_' );
+			decodedNgram.append( ' ' );
 		}
 	}
 }

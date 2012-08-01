@@ -86,7 +86,7 @@ typedef struct TstNode
 template <class Object>
 struct TstItem
 {
-	TstItem ( const string & newKey, const Object & newValue ) : key( newKey ), value( newValue)
+	TstItem ( const String & newKey, const Object & newValue ) : key( newKey ), value( newValue)
 	{
 	}
 
@@ -98,7 +98,7 @@ struct TstItem
 	{
 	}
 
-	string key;
+	String key;
 	Object value;
 	
 	void operator=( const TstItem & item )
@@ -302,13 +302,13 @@ public:
 
 	Vector<int> prefixSearch( const char * prefix )
 	{
-		//string str( prefix );
+		//String str( prefix );
 		//str.append('*');
-		return partialMatchSearch( string( prefix ).append('*').c_str() );
+		return partialMatchSearch( String( prefix ).append('*').c_str() );
 	}
 
 	/**
-	* print the strings in the tree in sorted order with a recursive traversal
+	* print the Strings in the tree in sorted order with a recursive traversal
 	*/
 
 	Vector<int> getSortedItemIndexes( );
@@ -358,7 +358,7 @@ public:
 		existingItemIndex = -1;
 #ifdef TST_INFO_ENABLE
 		fprintf( stderr, "total %d node in the TST tree, node size %d, total %d bytes.\n", nodeCount, 13, nodeCount * 13 );
-		fprintf( stderr, "total %d bytes for strings.\n", strLenCount );
+		fprintf( stderr, "total %d bytes for Strings.\n", strLenCount );
 #endif
 	}
 
@@ -445,7 +445,7 @@ private:
 
 	void getSortedItemIndexes( TstTree p );
 
-	/*Vector<string> keyVector; // vector to track all inserted keys.
+	/*Vector<String> keyVector; // vector to track all inserted keys.
 
 	Vector<Object> valueVector; // vector to track all inserted objects.
 	*/
@@ -483,7 +483,7 @@ template <class Object>
 TstNode * TernarySearchTree<Object>::add( const char* key, const Object & value )
 {
 #ifdef TST_INFO_ENABLE
-	strLenCount += sizeof( string(key)) + (int)strlen(key) + 1;
+	strLenCount += sizeof( String(key)) + (int)strlen(key) + 1;
 #endif
 	TstNode * p = add( key );
 	if ( p )
@@ -521,7 +521,7 @@ TstNode* TernarySearchTree<Object>::add( const char* key )
 		}
 		else if ( *key == p->splitChar )  
 		{
-			// return true, if the current character is the end-of-string character 0
+			// return true, if the current character is the end-of-String character 0
 			if ( *key == 0 )
 			{
 				this->existingItemIndex = p->index;

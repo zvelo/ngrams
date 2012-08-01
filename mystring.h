@@ -34,59 +34,57 @@ WebSite: http://www.cs.dal.ca/~zyu
 
 using namespace std;
 
-#define string String
-
 class StringIndexOutOfBounds { };
 
-class string
+class String
 {
 public:
 
    // The size type used
    typedef unsigned int size_type;
 
-   // string empty constructor
-   string () : buffer(NULL), strLength(0), bufferLength(0) 
+   // String empty constructor
+   String () : buffer(NULL), strLength(0), bufferLength(0) 
    {
    }
 
-   // string constructors, mark them explicit to force us to find unnecessary casting
-   //Construct a string from a null-terminated character array.
+   // String constructors, mark them explicit to force us to find unnecessary casting
+   //Construct a String from a null-terminated character array.
    //explicit 
-   string( const char *cstring );     
+   String( const char *cstring );     
 
-   //Construct a string from a char
+   //Construct a String from a char
    //explicit 
-   string( const char ch );
+   String( const char ch );
 
-   //construct a string from an integer
-   string ( int value ); 
+   //construct a String from an integer
+   String ( int value ); 
 
    /**
-    * Construct a string with char filled len times
+    * Construct a String with char filled len times
     *
-    * @param len length of new string.
-    * @param char to fill the string.
+    * @param len length of new String.
+    * @param char to fill the String.
     */
-   string(size_t len, const char chr = ' ');
+   String(size_t len, const char chr = ' ');
 
    /**
-    * Construct a string with substring of str from index start with specified length 
-    * @param str new string
+    * Construct a String with subString of str from index start with specified length 
+    * @param str new String
     * @param start - start index
-    * @param len - len of the substring
+    * @param len - len of the subString
     */
-   string( const string &str, size_t start, size_t len );
+   String( const String &str, size_t start, size_t len );
 
    /**
     * Copy constructor
     */
-   string( const string & copy );
+   String( const String & copy );
    
    /**
     * Destructor
     */
-   virtual ~string( )
+   virtual ~String( )
    { 
       if ( this->bufferLength )
          free( this->buffer );
@@ -94,25 +92,25 @@ public:
       this->bufferLength = this->strLength =0;
    }
 
-   // string  operators
-   const string & operator = ( const char * content );
-   const string & operator = ( const string & copy );
-   const string & operator = ( const char ch );
+   // String  operators
+   const String & operator = ( const char * content );
+   const String & operator = ( const String & copy );
+   const String & operator = ( const char ch );
 
-   /*   bool operator == ( const string & str ) const;
+   /*   bool operator == ( const String & str ) const;
    bool operator == ( const char* str ) const;
-   bool operator != ( const string & str ) const;
+   bool operator != ( const String & str ) const;
    bool operator != ( const char* str ) const;
-   bool operator < ( const string & str ) const;
+   bool operator < ( const String & str ) const;
    bool operator < ( const char* str ) const;
-   bool operator > ( const string & str ) const;
+   bool operator > ( const String & str ) const;
    bool operator > ( const char* str ) const;
-   bool operator <= ( const string & str ) const;
+   bool operator <= ( const String & str ) const;
    bool operator <= ( const char* str ) const;
-   bool operator >= ( const string & str ) const;
+   bool operator >= ( const String & str ) const;
    bool operator >= ( const char* str ) const;
     */
-   bool operator == ( const string & str ) const
+   bool operator == ( const String & str ) const
    {
       return this->strLength == str.strLength && compare( str.c_str() ) == 0 ;
    }
@@ -122,7 +120,7 @@ public:
       return this->compare( str ) == 0 ;
    }
 
-   bool operator!=( const string & str ) const
+   bool operator!=( const String & str ) const
    {
       return this->strLength != str.strLength || !( *this == str );
    }
@@ -132,7 +130,7 @@ public:
       return !( *this == str );
    }
 
-   bool operator < ( const string & str ) const
+   bool operator < ( const String & str ) const
    {
       return this->compare( str.c_str() ) < 0 ;
    }
@@ -143,7 +141,7 @@ public:
    }
 
 
-   bool operator > ( const string & str ) const
+   bool operator > ( const String & str ) const
    {
       return this->compare( str.c_str() ) > 0 ;
    }
@@ -153,7 +151,7 @@ public:
       return this->compare( str ) > 0 ;
    }
 
-   bool operator <= ( const string & str ) const
+   bool operator <= ( const String & str ) const
    {
       return this->compare( str.c_str() ) <= 0 ;
    }
@@ -162,7 +160,7 @@ public:
    {
       return this->compare( str ) <= 0 ;
    }
-   bool operator >= ( const string & str ) const
+   bool operator >= ( const String & str ) const
    {
       return this->compare( str.c_str() ) >= 0 ;
    }
@@ -172,21 +170,21 @@ public:
       return this->compare( str ) >= 0 ;
    }
 
-   // string += ( will use underline append operation )
-   string & operator += ( const char * suffix )
+   // String += ( will use underline append operation )
+   String & operator += ( const char * suffix )
    {
       assert( suffix );
       this->append ( suffix );
       return *this;
    }
 
-   string & operator += ( int single )
+   String & operator += ( int single )
    {
       this->append (single);
       return *this;
    }
 
-   string& operator += ( const string & suffix )
+   String& operator += ( const String & suffix )
    {
       this->append (suffix);
       return *this;
@@ -211,7 +209,7 @@ public:
    }
 
    /**
-    * convert string into a classic char *
+    * convert String into a classic char *
     */
    const char * c_str( ) const        
    {         
@@ -219,7 +217,7 @@ public:
    }
 
    /**
-    * check whether string is empty
+    * check whether String is empty
     */
    bool isEmpty () const
    {
@@ -227,7 +225,7 @@ public:
    }
    
    /**
-    * Whether string is null
+    * Whether String is null
     *
     * @return true if is null.
     */
@@ -244,13 +242,13 @@ public:
       return this->buffer ==  NULL;
    }
 
-   // Return string length
+   // Return String length
    size_t length( ) const  
    { 
    	  return strLength ? strLength : 0; 
    }
 
-   // Return string allocated size
+   // Return String allocated size
    size_t getSize( ) const  
    { 
    	  return bufferLength ? bufferLength : 0; 
@@ -263,26 +261,26 @@ public:
       return this->buffer [index];
    }
 
-   enum { MAX_LENGTH = 2048 };  // Maximum length for input string
+   enum { MAX_LENGTH = 2048 };  // Maximum length for input String
 
-   string & append ( const char *suffix ) 
+   String & append ( const char *suffix ) 
    { 
       return this->append( suffix, strlen(suffix) ); 
    }
 
-   string & append( const char* str, size_t len );
+   String & append( const char* str, size_t len );
 
-   // append function for another string
-   string & append ( const string & suffix )
+   // append function for another String
+   String & append ( const String & suffix )
    {
       return this->append ( suffix.c_str (), suffix.length() );
    }
 
    // append for a single char.
-   string & append(int c);
+   String & append(int c);
 
    /**
-    * Insert c_string into a string.
+    * Insert c_String into a String.
     *
     * @param start starting offset to insert at.
     * @param cstring to insert
@@ -290,62 +288,62 @@ public:
    void insert(size_t start, const char *str);
 
    /**
-    * Insert other string into a string.
+    * Insert other String into a String.
     *
-    * @param start string offset to insert at.
-    * @param str string to insert.
+    * @param start String offset to insert at.
+    * @param str String to insert.
     */
-   void insert(size_t start, const string &str);
+   void insert(size_t start, const String &str);
 
    /**
-    * Insert c_string into a string.
+    * Insert c_String into a String.
     *
     * @param start starting offset to insert at.
     * @param cstring to insert
-    * @param len length of the string
+    * @param len length of the String
     */
    void insert(size_t start, const char *str, size_t len );
 
    /**
-    * Retrieves a substring from this instance. 
-    * The substring starts at a specified character position, and extracted to the end
+    * Retrieves a subString from this instance. 
+    * The subString starts at a specified character position, and extracted to the end
     */
-   inline string substring( size_t start ) const
+   inline String subString( size_t start ) const
    {
-      return substring ( start, this->strLength );
+      return subString ( start, this->strLength );
    }
 
    /**
-    * Return a new string that contains a specific substring of the
-    * current string.
+    * Return a new String that contains a specific subString of the
+    * current String.
     *
-    * @return new string.
-    * @param start starting offset for extracted substring.   
-    * @param len length of substring.
+    * @return new String.
+    * @param start starting offset for extracted subString.   
+    * @param len length of subString.
     */
-   inline string substring( size_t start, size_t len) const 
+   inline String subString( size_t start, size_t len) const 
    { 
-      return string( *this, start, len ); 
+      return String( *this, start, len ); 
    };
 
    /**
-    * Returns a copy of this string in uppercase.
-    * @return new string in upper case
+    * Returns a copy of this String in uppercase.
+    * @return new String in upper case
     */
 
-   string toUpper();
+   String toUpper();
 
    /**
-    * Returns a copy of this string in lower.
-    * @return new string in lower case
+    * Returns a copy of this String in lower.
+    * @return new String in lower case
     */
 
-   string toLower();
+   String toLower();
 
    /**
     * Removes all space from both the start and end of this instance.
     */
-   inline string & trim( )   
+   inline String & trim( )   
    { 
       return this->trim( " " );
    }
@@ -358,7 +356,7 @@ public:
     *         If trimChars is a null reference, white space characters are removed instead.
     */
 
-   inline string & trim(const char *trimChars)
+   inline String & trim(const char *trimChars)
    {
       return this->trimEnd( trimChars ).trimStart( trimChars );
    }
@@ -366,7 +364,7 @@ public:
    /**
     * Removes all space from the end of this instance.
     */
-   inline string & trimEnd( )   
+   inline String & trimEnd( )   
    { 
       return this->trimEnd( " " ); 
    }
@@ -378,12 +376,12 @@ public:
     * @return The String that remains after all occurrences of the characters in trimChars are removed from the end.
     *         If trimChars is a null reference, white space characters are removed instead.
     */
-   string & trimEnd( const char * trimChars );
+   String & trimEnd( const char * trimChars );
 
    /**
     * Removes all space from the start of this instance.
     */
-   inline string & trimStart( )   { return trimStart( " " ); }
+   inline String & trimStart( )   { return trimStart( " " ); }
 
    /** 
     * Removes all occurrences of a set of characters specified in an array from the beginning of this instance.
@@ -392,18 +390,18 @@ public:
     * @return The String that remains after all occurrences of characters in trimChars are removed from the beginning. 
     *         If trimChars is a null reference, white space characters are removed instead.
     */
-   string & trimStart( const char *trimChars );
+   String & trimStart( const char *trimChars );
 
    /**
     * Removes a specified number of characters from this instance beginning at a specified position.
     *
     * @param startIndex - The position in this instance to begin deleting characters.
     * @param count number of characters to erase.
-    * @return current string instance less count number of characters.
+    * @return current String instance less count number of characters.
     */
    void remove( size_t startIndex, size_t count );
 
-   string & replace ( const char * oldValue, const char * newValue )
+   String & replace ( const char * oldValue, const char * newValue )
    {
       if ( oldValue && newValue )
       {
@@ -419,7 +417,7 @@ public:
 
 
    /**
-    * Replace text at a specific position in the string with new
+    * Replace text at a specific position in the String with new
     * text.
     *
     * @param startIndex -  starting offset to replace at.
@@ -427,22 +425,22 @@ public:
     * @param text - text to replace with.
     * @param count - size of replacement text.
     */
-   string & replace(size_t startIndex, size_t len, const char *text, size_t count );
+   String & replace(size_t startIndex, size_t len, const char *text, size_t count );
 
    /**
-    * Replace text at a specific position in the string with new
-    * string,
+    * Replace text at a specific position in the String with new
+    * String,
     *
     * @param startIndex starting offset to replace at.
     * @param len length of text to remove.
-    * @param replStr string to replace with.
+    * @param replStr String to replace with.
     */
-   string & replace( size_t startIndex, size_t len, const string &replStr );
+   String & replace( size_t startIndex, size_t len, const String &replStr );
 
 
    /**
-    * get total number of occurrence of chars that appears in the string
-    * @param chars - pattern string
+    * get total number of occurrence of chars that appears in the String
+    * @param chars - pattern String
     * @return total number of occurrence
     */
    int getOccurrence( const char * chars ) const;
@@ -450,31 +448,31 @@ public:
 
    /**
     * Reports the index of the first occurrence of a String with length len, or one or more characters, within this instance.
-    * @param chars - NULL terminated char string
+    * @param chars - NULL terminated char String
     * @return The index position of value if that character is found, or -1 if it is not.
     */
-   int indexOf( const string& str ) const { return indexOf( str.c_str() ); }
+   int indexOf( const String& str ) const { return indexOf( str.c_str() ); }
 
    /**
     * Reports the index of the first occurrence of a String with length len, or one or more characters, within this instance.
-    * @param chars - NULL terminated char string
+    * @param chars - NULL terminated char String
     * @return The index position of value if that character is found, or -1 if it is not.
     */
    int indexOf( const char * chars ) const { return chars ? indexOf( chars, 0 ) : -1; }
 
    /**
     * Reports the index of the first occurrence of a String with length len, or one or more characters, within this instance.
-    * @param chars - NULL terminated char string
-    * @param startIndex - start position of the string for searching
+    * @param chars - NULL terminated char String
+    * @param startIndex - start position of the String for searching
     * @return The index position of value if that character is found, or -1 if it is not.
     */
    int indexOf( const char * chars, size_t startIndex ) const  { return indexOf( chars, startIndex, chars? strlen(chars) : 0 ); }
 
    /**
     * Reports the index of the first occurrence of a String with length len, or one or more characters, within this instance.
-    * @param chars - NULL terminated char string
+    * @param chars - NULL terminated char String
     * @param startIndex - The search starting position.
-    * @param len - length of the string for search
+    * @param len - length of the String for search
     * @return The index position of value if that character is found, or -1 if it is not.
     */
    int indexOf( const char * chars, size_t startIndex, size_t len ) const ;
@@ -483,18 +481,18 @@ public:
     * String Pattern Match with Boyer-Moore algorithm, which is 
     * considered as the most efficient algorithm in usual applications.
     *
-    * @param pattern - NULL terminated pattern string ( can also be called keyword )
-    * @param len - length of the pattern string
-    * @param startIndex - the start position of the string for searching.
-    * @return The index position of value if pattern string is found, or -1 if it is not.
+    * @param pattern - NULL terminated pattern String ( can also be called keyword )
+    * @param len - length of the pattern String
+    * @param startIndex - the start position of the String for searching.
+    * @return The index position of value if pattern String is found, or -1 if it is not.
     */
    int BoyerMooreSearch( const char * str, const char* pattern, size_t len ) const;
 
    /**
-    * Re-allocate buffer space for string.
-    * resize methods changes the size of the string buffer to the given size. 
+    * Re-allocate buffer space for String.
+    * resize methods changes the size of the String buffer to the given size. 
     * size can be any size, larger or smaller than the original. 
-    * If len is zero, then the string becomes a null string.
+    * If len is zero, then the String becomes a null String.
     *
     * @param size new size to use.
     * @example 
@@ -507,10 +505,10 @@ public:
 
    void resize(size_t newSize );
 
-   // Releases the memory that not used by string, to save memory.
+   // Releases the memory that not used by String, to save memory.
    void squeeze ();
    /**
-    * whether the string is a number
+    * whether the String is a number
     */
    bool isNumber() const
    {
@@ -527,7 +525,7 @@ public:
    }
 
    /**
-    * Reset the string to an empty string.
+    * Reset the String to an empty String.
     */
    void empty ()
    {
@@ -540,9 +538,9 @@ public:
 
 private:
    char *buffer;                  // storage for characters
-   size_t strLength;                 // length of string (# of characters)
+   size_t strLength;                 // length of String (# of characters)
    size_t bufferLength;              // capacity of buffer
-   // Internal function that clears the content of a string
+   // Internal function that clears the content of a String
    void emptyIt ()
    {
       if ( this->bufferLength )
@@ -555,19 +553,19 @@ private:
 
 
    /**
-    * Internal function that initialize the string object
+    * Internal function that initialize the String object
     */
    void init();
 
    /**
     * A derivable low level comparison operator.  This can be used
-    * to create custom comparison data types in derived string
+    * to create custom comparison data types in derived String
     * classes.
     *
     * @return 0 if match, or value for ordering.
     * @param text text to compare.
     * @param len length of text to compare.
-    * @param index offset from start of string, used in searchs.
+    * @param index offset from start of String, used in searchs.
     */
    inline int compare(const char *text, size_t len = 0, size_t index = 0) const
    {
@@ -580,16 +578,16 @@ private:
 
 };
 
-ostream & operator<<( ostream & out, const string & str );    // Output
-istream & operator>>( istream & in, string & str );           // Input
-istream & getline( istream & in, string & str );              // Read line
+ostream & operator<<( ostream & out, const String & str );    // Output
+istream & operator>>( istream & in, String & str );           // Input
+istream & getline( istream & in, String & str );              // Read line
 
-string operator + ( const string &s1, const char c2 );
-string operator + ( const char c1, const string &s2);
-string operator + ( const string &s1, const string &s2 );
-string operator + ( const string &s1, const char *s2 );
-string operator + ( const char *s1, const string &s2 );
-string operator + ( const string & s1, const char* s2 );
-string operator + (const char* s1, const string & s2);
+String operator + ( const String &s1, const char c2 );
+String operator + ( const char c1, const String &s2);
+String operator + ( const String &s1, const String &s2 );
+String operator + ( const String &s1, const char *s2 );
+String operator + ( const char *s1, const String &s2 );
+String operator + ( const String & s1, const char* s2 );
+String operator + (const char* s1, const String & s2);
 
 #endif

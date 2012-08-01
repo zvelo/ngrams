@@ -63,10 +63,10 @@ public:
 	/**
 	* feed a token in, the token will be processed internally to generating ngram
 	*
-	* the token will be word string, 
+	* the token will be word String, 
 	*/
 
-	void addToken ( const string & token );
+	void addToken ( const String & token );
 	
 	/**
 	* sort ngrams by frequency/ngram/or both, then output
@@ -78,12 +78,12 @@ private:
 
 	TernarySearchTree<unsigned> wordTable; //save all the unique words with a unique id
 
-	// convert number base 10 to a number string in different base 
-	// base: max to ENCODE_BASE, we need leave one ascii as end of string sign, one for word seperator
+	// convert number base 10 to a number String in different base 
+	// base: max to ENCODE_BASE, we need leave one ascii as end of String sign, one for word seperator
 	void encodeInteger( int num, int bas, char* buff );
 
-	// decode a number string in base x to an integer in base 10
-	// bas: max to ENCODE_BASE, we need leave one ascii as end of string sign and one for word seperator
+	// decode a number String in base x to an integer in base 10
+	// bas: max to ENCODE_BASE, we need leave one ascii as end of String sign and one for word seperator
 	int decodeInteger( unsigned char * buffer, int bas );
 
 	/**
@@ -111,7 +111,7 @@ private:
 	/**
 	* output one id ngram (eg. 10_9_283 ) to word ngram ( eg. this_is_a )
 	*/
-	/*void outputWordNgram( const string & ngram, int frequency, int n )
+	/*void outputWordNgram( const String & ngram, int frequency, int n )
 	{
 	int index = 0;
 	int loop = 0;
@@ -139,7 +139,7 @@ private:
 	* convert from id ( encoded ) into word ngram
 	*/
 
-	void decodeWordNgram( const string & ngram, int n, string & decodedNgram );
+	void decodeWordNgram( const String & ngram, int n, String & decodedNgram );
 
 	/** 
 	* get ngram list for given n

@@ -83,12 +83,12 @@ public:
 		return ngramType;
 	}
 
-	string getInFileName()
+	String getInFileName()
 	{
 		return inFileName;
 	}
 
-	string getOutFileName()
+	String getOutFileName()
 	{
 		return outFileName;
 	}
@@ -96,8 +96,8 @@ public:
 private:
 	int ngramN;	// default number of ngrams
 	int ngramType;	// default type
-	string inFileName;	// input text file name
-	string outFileName;	// output text file name
+	String inFileName;	// input text file name
+	String outFileName;	// output text file name
 
 };
 

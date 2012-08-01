@@ -38,8 +38,8 @@ WordNgrams::~WordNgrams()
 
 void WordNgrams::addTokens()
 {
-	// get token string from input file
-	string & inFileName = getInFileName();
+	// get token String from input file
+	String & inFileName = getInFileName();
 	FILE * fp = inFileName.length() > 0 ? fopen( inFileName.c_str(), "r" ) : stdin;
 	if ( !fp )
 	{
@@ -50,7 +50,7 @@ void WordNgrams::addTokens()
 	int count = 0;
 	char c;
 	bool isSpecialChar = false;
-	string token;
+	String token;
 	token.reserve(256);
 	while ( ( c = (char) fgetc( fp ) ) != EOF )
 	{
@@ -96,7 +96,7 @@ void WordNgrams::addTokens()
 	fclose( fp );
 }
 
-void WordNgrams::addToken ( const string & token )
+void WordNgrams::addToken ( const String & token )
 {
    char buff[32];
    
@@ -109,7 +109,7 @@ void WordNgrams::preParse( int count )
 {
 	TokenNode * p, * newHead;
 	p = newHead = head;
-	string ngram;
+	String ngram;
 	ngram.reserve(256);
 	while ( newHead )
 	{
@@ -139,7 +139,7 @@ void WordNgrams::parse()
 {
 	TokenNode * p, * newHead;
 	p = newHead = head;
-	string ngram;
+	String ngram;
 	ngram.reserve( 256 );
 	while ( newHead )
 	{
@@ -220,14 +220,14 @@ void WordNgrams::getNgrams( vector< NgramToken * > & ngramVector, int n )
 	// Get sorted item list
 	Vector< TstItem< NgramValue > * > & itemVector = this->getItems( );
 	size_t count = itemVector.count();
-	string decodedKey;
+	String decodedKey;
 	decodedKey.reserve( 256 );
 	for ( unsigned i=0; i < count; i++ )
 	{
 		TstItem< NgramValue > * item = itemVector[i];
 		if ( item->value.n == n )
 		{
-			// decode the key to readable string
+			// decode the key to readable String
 			decodedKey.empty();
 			this->decodeWordNgram( item->key, n, decodedKey );
 			ngramVector.add( new NgramToken( decodedKey, item->value ) );
@@ -284,7 +284,7 @@ int WordNgrams::decodeInteger( unsigned char * buffer, int bas )
    return num;
 }
 	
-void WordNgrams::decodeWordNgram( const string & ngram, int n, string & decodedNgram )
+void WordNgrams::decodeWordNgram( const String & ngram, int n, String & decodedNgram )
 {
 	//printf("outputWordNgram %s.\n", ngram.c_str() );
 	int index = 0;

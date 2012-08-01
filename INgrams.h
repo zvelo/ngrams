@@ -52,7 +52,7 @@ public:
 		NgramToken()
 		{
 		}
-		NgramToken( string & newNgram, NgramValue & newValue )
+		NgramToken( String & newNgram, NgramValue & newValue )
 		{
 			ngram = newNgram;
 			value = newValue;
@@ -63,7 +63,7 @@ public:
 			ngram = copy.ngram;
 			value = copy.value;
 		}
-		string ngram;
+		String ngram;
 		NgramValue value;
 
 		void operator=( const NgramToken & ngramToken )
@@ -184,11 +184,11 @@ public:
 	/**
 	* feed a token in, the token will be processed internally to generating ngram
 	*
-	* for word ngram, the token will be word string, 
-	* for character ngram, the token will be a string of the character.
+	* for word ngram, the token will be word String, 
+	* for character ngram, the token will be a String of the character.
 	*/
 
-	virtual void addToken ( const string & token )=0;
+	virtual void addToken ( const String & token )=0;
 
 	/**
 	* sort ngrams by frequency/ngram/or both, then output

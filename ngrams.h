@@ -53,11 +53,11 @@ public:
 	/**
 	* feed a token in, the token will be processed internally to generating ngram
 	*
-	* for word ngram, the token will be word string, 
-	* for character ngram, the token will be a string of the character.
+	* for word ngram, the token will be word String, 
+	* for character ngram, the token will be a String of the character.
 	*/
 
-	virtual void addToken ( const string & token );
+	virtual void addToken ( const String & token );
 
 	/**
 	* set delimiters
@@ -72,7 +72,7 @@ public:
 		this->stopChars = newStopChars;
 	}
 
-	string & getInFileName()
+	String & getInFileName()
 	{
 		return this->inFileName;
 	}
@@ -145,11 +145,11 @@ public:
 protected:
 
 	TernarySearchTree< NgramValue > ngramTable;
-	string delimiters;
+	String delimiters;
 
 	struct TokenNode
 	{
-		string token;
+		String token;
 		TokenNode * next;
 		TokenNode ( const char * newToken ) : token( newToken ), next( 0 )
 		{
@@ -181,9 +181,9 @@ protected:
 
 private:
 
-	string inFileName;	// input text file name
-	string outFileName;	// output text file name
-	string stopChars;
+	String inFileName;	// input text file name
+	String outFileName;	// output text file name
+	String stopChars;
 	int tokenCount; //used for counting when parsing text
 	int * totals;   // array for count total grams ( duplicated are counted ) for each N
 	int * uniques; // array for counting unique grams for each each N

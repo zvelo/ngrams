@@ -37,8 +37,8 @@ CharNgrams::~CharNgrams()
 
 void CharNgrams::addTokens()
 {
-	// get token string from input file
-	string & inFileName = getInFileName();
+	// get token String from input file
+	String & inFileName = getInFileName();
 	FILE * fp = inFileName.length() > 0 ? fopen( inFileName.c_str(), "r" ) : stdin;
 
 	int count = 0;
@@ -85,7 +85,7 @@ void CharNgrams::preParse( int count )
 {
 	TokenNode * p, * newHead;
 	p = newHead = head;
-	string ngram;
+	String ngram;
 	ngram.reserve( 64 );
 	while ( newHead )
 	{
@@ -111,7 +111,7 @@ void CharNgrams::parse()
 {
 	TokenNode * p, * newHead;
 	p = newHead = head;
-	string ngram;
+	String ngram;
 	ngram.reserve( 64 );
 	while ( newHead )
 	{
@@ -165,7 +165,7 @@ void CharNgrams::output()
 void CharNgrams::getNgrams( vector< NgramToken * > & ngramVector, int n )
 {
 	// Get sorted item list
-	//Vector<string> & keyVector = getKeys( );
+	//Vector<String> & keyVector = getKeys( );
 	//Vector<NgramValue> & valueVector = getValues( );
 	Vector< TstItem< NgramValue > * > & itemVector = getItems();
 	size_t count = itemVector.count();

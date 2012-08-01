@@ -39,7 +39,7 @@ ngramN(newNgramN), inFileName(newInFileName), outFileName(newOutFileName)
 	memset( uniques, 0, ngramN * sizeof(int) );
 }
 
-void Ngrams::addToken ( const string & token )
+void Ngrams::addToken ( const String & token )
 {
 	int count = this->pushQueue( token.c_str() );
 

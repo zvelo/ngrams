@@ -84,27 +84,27 @@ public:
 	* @return	value of the option. If not found, return ""
 	*/
 
-	static string getOptionValue ( string option, int argc, char * argv[] )
+	static String getOptionValue ( String option, int argc, char * argv[] )
 	{
-		string value = "";
-		string commandLine = "";
+		String value = "";
+		String commandLine = "";
 		for ( int i = 0; i < argc; i++ )
 		{
 			commandLine += " ";
-			commandLine += string( argv[i] );
+			commandLine += String( argv[i] );
 		}
 		int start = commandLine.toLower().indexOf ( option.toLower() );
 		if ( start != -1 )
 		{
-			value = commandLine.substring( start + option.length() );
+			value = commandLine.subString( start + option.length() );
 			int end = value.indexOf( " -" );
 			if ( end != -1 )
 			{
-				value = value.substring( 0, end + 1 );
+				value = value.subString( 0, end + 1 );
 
 			}
 		}
-		//printf("option string %s.\n", value.c_str() );
+		//printf("option String %s.\n", value.c_str() );
 		return value.trim().trimStart( "=" ).trim();
 	}
 
@@ -117,9 +117,9 @@ public:
 	* @return	true if contain the option, otherwise false
 	*/
 
-	static bool hasOption ( string option, int argc, char * argv[] )
+	static bool hasOption ( String option, int argc, char * argv[] )
 	{
-		string s;
+		String s;
 		for ( int i = 0; i < argc; i++ )
 		{
 			s.append( argv[ i ] );

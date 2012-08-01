@@ -27,7 +27,7 @@ WebSite: http://www.cs.dal.ca/~zyu
 
 #define D(x)
 #define MAX(a,b) a>b ? a : b;
-string::string( const char * cstring )
+String::String( const char * cstring )
 {
    assert ( cstring );
    if ( cstring )
@@ -48,7 +48,7 @@ string::string( const char * cstring )
    }
 }
 
-string::string( const char ch ) : strLength(1), bufferLength(2)
+String::String( const char ch ) : strLength(1), bufferLength(2)
 {
    if ( ( this->buffer = ( char * ) calloc( 2, 1 ) ) )
    {
@@ -56,7 +56,7 @@ string::string( const char ch ) : strLength(1), bufferLength(2)
    }
 }
 
-string::string ( int value ) 
+String::String ( int value ) 
 {
    char valueBuffer[32];
    sprintf( valueBuffer, "%d", value );
@@ -65,14 +65,14 @@ string::string ( int value )
    memcpy( this->buffer, valueBuffer, this->bufferLength ); 
 }
 
-string::string( size_t len, const char chr )
+String::String( size_t len, const char chr )
 {
    this->resize( len + 1);
    memset( this->buffer, chr, len);
    this->strLength = len;
 }
 
-string::string( const string & copy ) 
+String::String( const String & copy ) 
 {
    if ( copy.bufferLength )
    {
@@ -88,15 +88,15 @@ string::string( const string & copy )
    }
    else
    {
-      this->init(); // initialize the string object
+      this->init(); // initialize the String object
    }
 
 }
 
-string::string( const string &str, size_t start, size_t len )
+String::String( const String &str, size_t start, size_t len )
 {
    assert ( start <= str.length() );
-   // if given length is overpass the size of string, use the longest substring available.
+   // if given length is overpass the size of String, use the longest subString available.
    size_t count = str.length() - start;
    if ( len <= count )
    {
@@ -113,8 +113,8 @@ string::string( const string &str, size_t start, size_t len )
 }
 
 
-// string = operator. Safe when assign own content
-const string & string::operator = ( const char * content )
+// String = operator. Safe when assign own content
+const String & String::operator = ( const char * content )
 {
    if ( content )
    {
@@ -138,7 +138,7 @@ const string & string::operator = ( const char * content )
    return *this;
 }
 
-const string & string::operator=( const string & copy )
+const String & String::operator=( const String & copy )
 {
    // Prevent copy to self! if copy itself, do nothing.
    if ( &copy != this ) 
@@ -160,7 +160,7 @@ const string & string::operator=( const string & copy )
 }
 
 
-const string & string::operator=( const char ch )
+const String & String::operator=( const char ch )
 {
    this->emptyIt();
 
@@ -177,33 +177,33 @@ const string & string::operator=( const char ch )
    return *this;
 }
 
-string operator + ( const string & s1, const string & s2 )
+String operator + ( const String & s1, const String & s2 )
 {
    return s1 + s2.c_str();
 }
-string operator + ( const string & s1, const char* s2 )
+String operator + ( const String & s1, const char* s2 )
 {
-   return string( s1 ) += s2;
+   return String( s1 ) += s2;
 }
 
-string operator + (const char * s1, const string & s2)
+String operator + (const char * s1, const String & s2)
 {
-   return string( s1 ) += s2;
+   return String( s1 ) += s2;
 }
 
-string operator + ( const string &s1, const char c2 )
+String operator + ( const String &s1, const char c2 )
 {
-   return string( s1 ) += c2;
+   return String( s1 ) += c2;
 }
 
-inline string operator + ( const char c1, const string &s2)
+inline String operator + ( const char c1, const String &s2)
 {
 
-   return string ( c1 ) += s2;
+   return String ( c1 ) += s2;
 }
 
-// append a const char * to an existing string
-string & string::append( const char* str, size_t len )
+// append a const char * to an existing String
+String & String::append( const char* str, size_t len )
 {
    if (str)
    {
@@ -226,7 +226,7 @@ string & string::append( const char* str, size_t len )
    return *this;
 }
 
-string & string::append(int c)
+String & String::append(int c)
 {
    size_t len = this->length();
    if( len + 1 >= this->getSize() )
@@ -240,42 +240,42 @@ string & string::append(int c)
 
 
 
-char & string::operator[ ]( unsigned k )
+char & String::operator[ ]( unsigned k )
 {
    assert( k < strLength );
    return this->buffer[ k ];
 }
 
-char string::operator[ ]( unsigned k ) const
+char String::operator[ ]( unsigned k ) const
 {
    assert ( k < strLength );
    return this->buffer[ k ];
 }
 
-ostream & operator<<( ostream & out, const string & str )
+ostream & operator<<( ostream & out, const String & str )
 {
    return out << str.c_str();
 }
 
-istream & operator>>( istream & in, string & str )
+istream & operator>>( istream & in, String & str )
 {
-   char buf[ string::MAX_LENGTH + 1 ];
+   char buf[ String::MAX_LENGTH + 1 ];
    in >> buf;
    if( !in.fail( ) )
       str = buf;
    return in;
 }
 
-istream & getline( istream & in, string & str )
+istream & getline( istream & in, String & str )
 {
-   char buf[ string::MAX_LENGTH + 1 ];
-   in.getline( buf, string::MAX_LENGTH );
+   char buf[ String::MAX_LENGTH + 1 ];
+   in.getline( buf, String::MAX_LENGTH );
    if( !in.fail( ) )
       str = buf;
    return in;
 }
 
-void string::reserve ( size_t size )
+void String::reserve ( size_t size )
 {
    this->emptyIt ();
    if (size)
@@ -289,7 +289,7 @@ void string::reserve ( size_t size )
    }
 }
 
-void string::resize(size_t newSize )
+void String::resize(size_t newSize )
 {
    newSize = newSize > 0 ? newSize : 0;
    if ( ( this->buffer = ( char* )realloc( buffer, newSize ) ) )
@@ -303,28 +303,28 @@ void string::resize(size_t newSize )
    }
 }
 
-void string::squeeze ()
+void String::squeeze ()
 {
    this->resize( strLength +1 );
 }
 
-inline void string::init()
+inline void String::init()
 {
    this->buffer = NULL;
    this->bufferLength = this->strLength = 0;
 }
 
-inline void string::insert( size_t start, const char *str )
+inline void String::insert( size_t start, const char *str )
 {
    this->insert( start, str, strlen( str ) );
 }
 
-inline void string::insert( size_t start, const string &str )
+inline void String::insert( size_t start, const String &str )
 {
    this->insert( start, str.c_str(), str.length() );
 }
 
-void string::insert( size_t start, const char *str, size_t len )
+void String::insert( size_t start, const char *str, size_t len )
 {
 
 
@@ -342,9 +342,9 @@ void string::insert( size_t start, const char *str, size_t len )
    return;
 }   
 
-string string::toUpper()
+String String::toUpper()
 {
-   string newString( *this );
+   String newString( *this );
    if ( !newString.isNull() && !newString.isEmpty() )
    {
       char* ptr = newString.buffer;
@@ -357,9 +357,9 @@ string string::toUpper()
    return newString;
 }
 
-string string::toLower()
+String String::toLower()
 {
-   string newString( *this );
+   String newString( *this );
    if ( !newString.isNull() && !newString.isEmpty() )
    {
       char* ptr = newString.buffer;
@@ -372,7 +372,7 @@ string string::toLower()
    return newString;
 }
 
-string & string::trimEnd( const char * trimChars )
+String & String::trimEnd( const char * trimChars )
 {
    if ( !trimChars )
       trimChars = " ";
@@ -393,7 +393,7 @@ string & string::trimEnd( const char * trimChars )
    return *this;
 }
 
-string & string::trimStart( const char *trimChars )
+String & String::trimStart( const char *trimChars )
 {
 
    if ( !trimChars )
@@ -416,7 +416,7 @@ string & string::trimStart( const char *trimChars )
    return *this;
 }
 
-void string::remove( size_t startIndex, size_t count )
+void String::remove( size_t startIndex, size_t count )
 {
    if ( startIndex >= this->strLength )
       return;
@@ -433,23 +433,23 @@ void string::remove( size_t startIndex, size_t count )
    this->buffer[ this->strLength ] = 0;
 }
 
-string & string::replace ( size_t startIndex, size_t len, const char *replChars, size_t count )
+String & String::replace ( size_t startIndex, size_t len, const char *replChars, size_t count )
 {
    remove( startIndex, len);
    this->insert( startIndex, replChars, count );
    return *this;
 }
 
-string & string::replace(size_t startIndex, size_t len, const string &replStr)
+String & String::replace(size_t startIndex, size_t len, const String &replStr)
 {
    remove( startIndex, len );
    this->insert( startIndex, replStr );
    return *this;
 }
 
-/* Brute Force implementation of string pattern matching*/
+/* Brute Force implementation of String pattern matching*/
 /*
-int string::indexOf( const char * chars, size_t startIndex, size_t len ) const
+int String::indexOf( const char * chars, size_t startIndex, size_t len ) const
 {
 int ret = -1;
 int index = 0;
@@ -465,7 +465,7 @@ return index;
 return ret;
 }
 */
-int string::getOccurrence( const char * chars ) const
+int String::getOccurrence( const char * chars ) const
 {
    int count = 0, index = 0;
    while ( ( index = this->indexOf( chars, (size_t)index )  ) != -1 )
@@ -476,7 +476,7 @@ int string::getOccurrence( const char * chars ) const
    return count;
 }
 
-int string::indexOf( const char * chars, size_t startIndex, size_t len ) const
+int String::indexOf( const char * chars, size_t startIndex, size_t len ) const
 {
    int index = -1;
    if( chars && startIndex < this->strLength && len <= this->strLength )
@@ -486,7 +486,7 @@ int string::indexOf( const char * chars, size_t startIndex, size_t len ) const
    return index == -1 ? -1 :  index + (int)startIndex;
 }
 
-int string::BoyerMooreSearch( const char * str, const char* pattern, size_t len ) const
+int String::BoyerMooreSearch( const char * str, const char* pattern, size_t len ) const
 {
    const int max_chars = 256; // max number of unique chars
    int skip[ max_chars ];
@@ -502,9 +502,9 @@ int string::BoyerMooreSearch( const char * str, const char* pattern, size_t len 
          textIndex += MAX( (int)len - patternIndex, skip[ (int)str[textIndex] ] ); // reposition the text index
          if( textIndex >= intLen ) 
          {
-            return -1; // pattern string not found in text string.
+            return -1; // pattern String not found in text String.
          }
-         patternIndex = (int)len-1; // repoint to last char of pattern string
+         patternIndex = (int)len-1; // repoint to last char of pattern String
       }
    }
    return textIndex + 1;

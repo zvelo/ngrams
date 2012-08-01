@@ -41,7 +41,7 @@ bool Text2wfreq::getOptions( int argc, char * argv[] )
 		return false;
 	}
 
-	string value = Config::getOptionValue( "-type", argc, argv );
+	String value = Config::getOptionValue( "-type", argc, argv );
 
 	if ( value == "character" )
 	{

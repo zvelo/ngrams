@@ -27,6 +27,8 @@ WebSite: http://www.cs.dal.ca/~zyu
 #include <sstream>
 
 using ::std::istringstream;
+using ::std::map;
+using ::std::string;
 
 WordNgrams::WordNgrams( int newNgramN, const char * newText, const char * newDelimiters, const char * newStopChars ) :
 Ngrams( newNgramN, newText, newDelimiters, newStopChars )
@@ -209,6 +211,24 @@ void WordNgrams::output()
 	}
 
 }
+
+void WordNgrams::process(map<string, uint32_t>* ngr) {
+	int ngramN = this->getN();
+	for (int i = 1; i <= ngramN; i++) {
+		Vector<NgramToken*> ngramVector;
+		this->getNgrams(ngramVector, i);
+
+		size_t count = ngramVector.count();
+		ngramVector.sort(INgrams::compareFunction);
+
+		for (unsigned j = 0; j < count; j++) {
+			NgramToken* ngramToken = ngramVector[j];
+			(*ngr)[ngramToken->ngram.c_str()] = ngramToken->value.frequency;
+			delete ngramToken;
+		}
+	}
+}
+
 
 void WordNgrams::getNgrams( Vector< NgramToken * > & ngramVector, int n )
 {

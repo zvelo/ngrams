@@ -27,6 +27,10 @@ WebSite: http://www.cs.dal.ca/~zyu
 #define _WORD_NGRAMS_H_
 
 #include "ngrams.h"
+#include <map>
+#include <string>
+#include <stdint.h>
+
 /**
 * class for all word ngrams related operations
 *
@@ -73,6 +77,9 @@ public:
 	*/
 
 	virtual void output();
+
+	virtual void process(std::map<std::string, uint32_t>* ngr);
+
 
 private:
 
